@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESP32 Motor Control</title>
+</head>
+<body>
+    <h2>Điều Khiển Động Cơ</h2>
+    <button onmousedown="sendRequest('di')" onmouseup="sendRequest('stop')">Tiến</button>
+    <button onmousedown="sendRequest('lui')" onmouseup="sendRequest('stop')">Lùi</button>
+    <button onclick="sendRequest('stop')">Dừng</button>
+
+    <script>
+        function sendRequest(action) {
+            fetch(`http://192.168.1.151/control?action=${action}`)
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
